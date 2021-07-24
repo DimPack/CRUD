@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Добавить пост')
+@section('title', 'Редактировать пост ' .$post->title)
 
 @section('content')
 <div class="row">
@@ -13,18 +13,19 @@
       </ul>
     </div>
     @endif
-    <form method="POST" action="{{ route('posts.store') }}">
+    <form method="POST" action="{{ route('posts.update', $post) }}">
       @csrf
+      @method('PATCH')
       <div class="mb-3">
         <label for="post-title">Название</label>
         <input type="text" name="title" 
-        value="{{ old('title') }}" class="form-control" id="post-title">
+        value="{{ $post -> title}}" class="form-control" id="post-title">
       </div>
       <div class="mb-3">
         <label for="post-description" class="form-label">Описание</label>
-        <textarea name="description" class="form-control" id="post-description" rows="3" >{{ old('description') }}</textarea>
+        <textarea name="description" class="form-control" id="post-description" rows="3" >{{ $post -> description }}</textarea>
       </div>
-      <button type="submit" class="btn btn-success">Добавить пост</button>
+      <button type="submit" class="btn btn-success">Редактировать пост</button>
     </form>
   </div>
 </div>

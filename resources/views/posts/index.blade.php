@@ -4,14 +4,14 @@
 @section('content')
 <a href="{{route('posts.create')}}" class="btn btn-success">Создать пост</a>
 @if(session()->get('success'))
-  <div class="alert alert-success">
+  <div class="alert alert-success mt-3">
      {{ session()->get('success') }}
   </div>
 @endif
 <table class="table table-striped mt-3">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">№</th>
       <th scope="col">Название</th>
       <th scope="col">Описание</th>
       <th></th>
@@ -30,7 +30,9 @@
           <a href="{{route('posts.edit', $post)}}" class="btn btn-primary">
           <i class="fas fa-edit"></i>
           </a>
-          <form method="POST" action="">
+          <form method="POST" action="{{route('posts.destroy', $post)}}">
+            @csrf
+            @method('DELETE')
             <button type="submit" class="btn btn-danger">
               <i class="fas fa-trash-alt"></i>
             </button>
